@@ -12,6 +12,9 @@ import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import ExpandMoreOutlinedIcon from '@material-ui/icons/ExpandMoreOutlined';
 
 const Sidebar = () => {
+
+ 
+
     return (
         <div className="sidebar">
             <SidebarRow selected Icon={HomeIcon} title="Home"/>
