@@ -11,12 +11,11 @@ import WatchLaterIcon from '@material-ui/icons/WatchLater';
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import ExpandMoreOutlinedIcon from '@material-ui/icons/ExpandMoreOutlined';
 
-const Sidebar = () => {
-
- 
+const Sidebar = ({sidebar}) => {
 
     return (
-        <div className="sidebar">
+        <div className={sidebar? "sidebar open" : "sidebar"}>
+            {sidebar ? <img src="https://logos-world.net/wp-content/uploads/2020/04/YouTube-Logo.png" alt="logo" className="sidebar__logo_mobile" /> : null}
             <SidebarRow selected Icon={HomeIcon} title="Home"/>
             <SidebarRow Icon={WhatshotIcon} title="Subscription"/>
             <SidebarRow Icon={SubscriptionsIcon} title="Trending"/>

@@ -1,8 +1,10 @@
 .recommendedVideos__container{
-    flex: 0.8;
+    flex: 1;
     background-color: #f9f9f8;
     padding: 40px 20px;
     padding-bottom: 0px;
+    width: 100%;
+    margin-left: 20%;
 }
 .recommendedVideos__container>h2{
     margin-left: 5px;
@@ -11,4 +13,18 @@
 .recommendedVideos{
     display: flex;
     flex-wrap: wrap;
+}
+
+@media (max-width:550px){
+    .recommendedVideos__container{
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-left: 0px;
+    }
+    .recommendedVideos{
+        display: flex;
+        justify-content: center;
+    }
 }

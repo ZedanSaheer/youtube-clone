@@ -1,36 +1,40 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import "./RecommendedVideos.css"
 import VideoCard from './VideoCard'
+import { useDispatch } from 'react-redux'
+import { getPopularVideos } from './redux/actions/videos.action'
+
+import InfiniteScroll from 'react-infinite-scroll-component'
+
+
 
 const RecommendedVideos = () => {
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getPopularVideos())
+    }, [dispatch])
+
+    const fetchData = () => {
+        dispatch(getPopularVideos())
+    }
+
+    const { videos } = useSelector(state => state.homeVideos)
+
     return (
         <div className="recommendedVideos__container">
-            <h1>Recommended</h1>
             <div className="recommendedVideos">
-            <VideoCard 
-                title="🔴 Let's Build a YouTube Clone with REACT JS for Beginners"
-                image="https://i.ytimg.com/vi/NT299zIk2JY/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBqZPjIgBJ_NTf7TnAGCXmQQ5C85Q"
-                channelImage="https://yt3.ggpht.com/_ZCAn1LoHREC4bgTiF8STDV9qLNA0Y_eDkztDBimDyG85lHtalFz6znIHczWipu0uJpFZTz81w=s88-c-k-c0x00ffffff-no-rj-mo"
-                timestamp="4 days ago"
-                views="2M views"
-                channel="Clever Programmer"
-            />
-            <VideoCard 
-                title="🔴 Let's Build a YouTube Clone with REACT JS for Beginners"
-                image="https://i.ytimg.com/vi/NT299zIk2JY/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBqZPjIgBJ_NTf7TnAGCXmQQ5C85Q"
-                channelImage="https://yt3.ggpht.com/_ZCAn1LoHREC4bgTiF8STDV9qLNA0Y_eDkztDBimDyG85lHtalFz6znIHczWipu0uJpFZTz81w=s88-c-k-c0x00ffffff-no-rj-mo"
-                timestamp="4 days ago"
-                views="2M views"
-                channel="Clever Programmer"
-            />
-            <VideoCard 
-                title="🔴 Let's Build a YouTube Clone with REACT JS for Beginners"
-                image="https://i.ytimg.com/vi/NT299zIk2JY/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBqZPjIgBJ_NTf7TnAGCXmQQ5C85Q"
-                channelImage="https://yt3.ggpht.com/_ZCAn1LoHREC4bgTiF8STDV9qLNA0Y_eDkztDBimDyG85lHtalFz6znIHczWipu0uJpFZTz81w=s88-c-k-c0x00ffffff-no-rj-mo"
-                timestamp="4 days ago"
-                views="2M views"
-                channel="Clever Programmer"
-            />
+                <InfiniteScroll
+                    dataLength={videos.length}
+                    next={fetchData}
+                    style={{ display: 'flex', flexWrap: 'wrap', overflow: 'hidden' }}
+                    hasMore={true}
+                    loader={
+                        <div className="spinner-border text-danger mx-auto"></div>
+                    }>
+                    {videos?.map((video, id) => (<VideoCard video={video} key={video.id} />))}
+                </InfiniteScroll>
             </div>
         </div>
     )

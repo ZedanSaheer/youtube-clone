@@ -6,10 +6,19 @@
 
 .app{
   width: 100%;
-  height: ;
+}
+.app::-webkit-scrollbar{
+  display: none;
 }
 
 .app__page{
   width: 100%;
   display: flex;
+  background-color: #f9f9f8;
+}
+
+@media (max-width:550px) {
+  .app__page{
+    justify-content: center;
+  }
 }

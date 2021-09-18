@@ -1,27 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./App.css"
 import Header from './Header'
 import RecommendedVideos from './RecommendedVideos'
 import Sidebar from './Sidebar'
-import SearchPage from './SearchPage'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
 
+
 const App = () => {
+
+  const [sidebar, setSidebar] = useState(false);
+
+  const handleSidebar = () => setSidebar(value => !value);
+
   return (
     <div className="app">
       <Router>
-        <Header />
+        <Header toggle={handleSidebar}/>
         <Switch>
-          <Route path="/search/:searchTerm">
-            <div className="app__page">
-            <Sidebar />
-            <SearchPage />
-            </div>
-          </Route>
           <Route path="/">
             <div className="app__page">
-              <Sidebar />
+              <Sidebar sidebar={sidebar}/>
               <RecommendedVideos />
             </div>
           </Route>
